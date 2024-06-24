@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_wallet/presentation/auth/auth.dart';
+import 'package:provider/provider.dart';
 import 'presentation/theme/theme.dart';
 
 void main() {

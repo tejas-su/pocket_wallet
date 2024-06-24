@@ -40,7 +40,8 @@ dependencies:
   skeletonizer:
   flutter_sticky_header:
   hidable:
-  http:
+  dio:
+  shared_preferences:
   
 
 dev_dependencies:

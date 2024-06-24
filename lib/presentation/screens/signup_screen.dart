@@ -3,17 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/cta_button.dart';
 
-class SignupScreen extends StatefulWidget {
+class SignupScreen extends StatelessWidget {
   final Function()? onTap;
   const SignupScreen({super.key, required this.onTap});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
-}
-
-class _SignupScreenState extends State<SignupScreen> {
-  @override
   Widget build(BuildContext context) {
+    TextEditingController? usernameController = TextEditingController();
+    TextEditingController? passwordController = TextEditingController();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -33,20 +30,22 @@ class _SignupScreenState extends State<SignupScreen> {
             const Center(
               child: Text('your personal wallet'),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 20, top: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
               child: TextField(
-                decoration: InputDecoration(
+                controller: usernameController,
+                decoration: const InputDecoration(
                     hintText: 'Username, Email or Phone number',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)))),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 20, top: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
               child: TextField(
+                controller: passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     suffixIcon: Icon(Icons.lock_rounded),
                     hintText: 'Password',
                     border: OutlineInputBorder(
@@ -71,7 +70,7 @@ class _SignupScreenState extends State<SignupScreen> {
               children: [
                 const Text('Already have an account? '),
                 GestureDetector(
-                  onTap: widget.onTap,
+                  onTap: onTap,
                   child: const Text(
                     'Signin',
                     style: TextStyle(fontWeight: FontWeight.bold),
