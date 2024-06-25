@@ -2,14 +2,11 @@
 
 import 'dart:convert';
 import 'package:dio/dio.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 import '../model/user_model.dart';
 
 // For login and Sign up Dio functions
 class LoginSignupService {
-  final _baseUrl = 'https://api.socialverseapp.com';
-  final _loginEndpoint = '/user/login';
-
   Future<User?> login(String mixed, String password) async {
     final dio = Dio();
     final loginData = {'mixed': mixed, 'password': password};
@@ -22,31 +19,11 @@ class LoginSignupService {
         ),
         data: loginData,
       );
+      //Local database to store user information and token
 
       if (response.statusCode == 200) {
         // return jsonDecode(response.data) as User;
-        return User.fromJson(json.encode(response.data));
-      } else {
-        throw Exception('Status message ${response.statusMessage}');
-      }
-    } catch (e) {
-      //for debugging
-    }
-  }
 
-  //Signup function
-  Future signup(String mixed, String password) async {
-    final dio = Dio();
-    final signupData = {'wallet_name': mixed, 'user_pin': password};
-
-    try {
-      final response = await dio.post(
-        Uri.parse('$_baseUrl$_loginEndpoint') as String,
-        data: signupData,
-      );
-
-      if (response.statusCode == 200) {
-        // return jsonDecode(response.data) as User;
         return User.fromJson(json.encode(response.data));
       } else {
         throw Exception('Status message ${response.statusMessage}');

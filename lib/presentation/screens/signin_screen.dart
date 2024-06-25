@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:my_wallet/presentation/screens/home_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_wallet/presentation/widgets/cta_button.dart';
 import 'package:my_wallet/services/services.dart';
 import 'package:provider/provider.dart';
@@ -103,30 +103,32 @@ class SigninScreen extends StatelessWidget {
                                 ],
                               )),
                         );
-
+                        var box = await Hive.openBox('users');
                         // Call login method from LoginService
                         final loginData =
                             await loginSignupService.login(username, password);
-
-                        if (loginData?.status == 'success') {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => const HomeScreen(),
-                            ),
-                          );
-                        }
-                        //Show error status if passwords does not match
-                        else if (loginData?.status == 'error') {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                backgroundColor:
-                                    const Color.fromRGBO(56, 56, 56, 1),
-                                content: Text(
-                                  '${loginData?.message}',
-                                  style: const TextStyle(color: Colors.white),
-                                )),
-                          );
-                        }
+                        await box.put('users', loginData);
+                        print('Saved info in the databse: ${box.get('users')}');
+                        print(loginData?.toMap());
+                        // if (loginData?.status == 'success') {
+                        //   Navigator.of(context).pushReplacement(
+                        //     MaterialPageRoute(
+                        //       builder: (context) => const HomeScreen(),
+                        //     ),
+                        //   );
+                        // }
+                        // //Show error status if passwords does not match
+                        // else if (loginData?.status == 'error') {
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     SnackBar(
+                        //         backgroundColor:
+                        //             const Color.fromRGBO(56, 56, 56, 1),
+                        //         content: Text(
+                        //           '${loginData?.message}',
+                        //           style: const TextStyle(color: Colors.white),
+                        //         )),
+                        //   );
+                        // }
                       }
                     },
                     fontWeight: FontWeight.bold,

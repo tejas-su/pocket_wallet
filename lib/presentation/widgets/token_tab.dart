@@ -6,7 +6,7 @@ class TokenTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 100,
+      itemCount: 7,
       itemBuilder: (context, index) {
         return const ListTile(
           leading: CircleAvatar(

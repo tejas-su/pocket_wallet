@@ -1,21 +1,39 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'package:hive_flutter/adapters.dart';
+part 'user_model.g.dart';
 
+@HiveType(typeId: 1)
 class User {
+  @HiveField(0)
   String? message;
+  @HiveField(1)
   String? status;
+  @HiveField(2)
   int? balance;
+  @HiveField(3)
   String? token;
+  @HiveField(4)
   String? username;
+  @HiveField(5)
   String? email;
+  @HiveField(6)
   String? firstName;
+  @HiveField(7)
   String? lastName;
+  @HiveField(8)
   bool? isVerified;
+  @HiveField(9)
   String? role;
+  @HiveField(10)
   String? ownerId;
+  @HiveField(11)
   String? walletAddress;
+  @HiveField(12)
   bool? hasWallet;
+  @HiveField(13)
   String? lastLogin;
+  @HiveField(14)
   String? profilePictureUrl;
   User({
     this.message,
