@@ -1,16 +1,14 @@
-# my_wallet
+# Pocket
 
-A new Flutter project.
+A Flutter application that mimics the wallet functionality found in the Vible Wallet App.
+The app performs various wallet-related operations by integrating with the provided APIs.
+Key functionalities include wallet creation, balance transfer, balance retrieval, and airdrop
+requests.
 
-## Getting Started
+## Overview
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This assignment involves creating a simple wallet application using Flutter. The application
+replicates the wallet features found in the specified app. The required APIs are 
+integrated into the Flutter app to handle various wallet operations. The aim is to
+demonstrate a good understanding of Flutter, API integration, state management with Provider,
+and mobile app development best practices.
