@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:my_wallet/model/wallet_model.dart';
 import '../model/user_model.dart';
 
 // For login and Sign up Dio functions
@@ -22,14 +22,40 @@ class LoginSignupService {
       //Local database to store user information and token
 
       if (response.statusCode == 200) {
-        // return jsonDecode(response.data) as User;
-
         return User.fromJson(json.encode(response.data));
       } else {
         throw Exception('Status message ${response.statusMessage}');
       }
     } catch (e) {
       //for debugging
+    }
+  }
+}
+
+class Wallet {
+  Future<WalletModel?> createWallet(
+      String walletName, String password, String token) async {
+    var headers = {'Flic-Token': token};
+    var data =
+        '''{\n    "wallet_name": $walletName,\n    "network": "devnet",\n    "user_pin": $password\n}''';
+    var dio = Dio();
+    try {
+      var response = await dio.request(
+        'https://api.socialverseapp.com/solana/wallet/create',
+        options: Options(
+          method: 'POST',
+          headers: headers,
+        ),
+        data: data,
+      );
+
+      if (response.statusCode == 200) {
+        return WalletModel.fromJson(jsonEncode(response.data));
+      } else {
+        throw Exception('Status message ${response.statusMessage}');
+      }
+    } catch (e) {
+      //
     }
   }
 }

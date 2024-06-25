@@ -1,32 +1,31 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:my_wallet/presentation/screens/create_wallet_screen.dart';
 import 'package:my_wallet/presentation/screens/home_screen.dart';
-import 'package:my_wallet/presentation/widgets/cta_button.dart';
-import 'package:my_wallet/services/services.dart';
 import 'package:provider/provider.dart';
 
-class SigninScreen extends StatelessWidget {
-  final Function()? onTap;
-  const SigninScreen({super.key, required this.onTap});
+import '../../model/user_model.dart';
+import '../../services/services.dart';
+import '../widgets/cta_button.dart';
+
+class CreateWalletScreen extends StatelessWidget {
+  const CreateWalletScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController? usernameController = TextEditingController();
-    TextEditingController? passwordController = TextEditingController();
-    LoginSignupService loginSignupService = LoginSignupService();
+    TextEditingController usernameController = TextEditingController();
+    TextEditingController networkController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    Wallet walletService = Wallet();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             const Image(
-              image: AssetImage('assets/logo/signin.png'),
+              image: AssetImage('assets/logo/create.png'),
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             Center(
                 child: Text(
@@ -42,7 +41,20 @@ class SigninScreen extends StatelessWidget {
               child: TextField(
                 controller: usernameController,
                 decoration: const InputDecoration(
-                    hintText: 'Username, Email or Phone number',
+                    hintText: 'Your name',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)))),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
+              child: TextField(
+                controller: networkController,
+                enabled: false,
+                obscureText: false,
+                decoration: const InputDecoration(
+                    suffixIcon: Icon(Icons.currency_bitcoin_rounded),
+                    hintText: 'Bitcoin',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)))),
               ),
@@ -61,11 +73,11 @@ class SigninScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
+              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 10),
               child: Consumer(
                 builder: (context, value, child) {
                   return CtaButton(
-                    text: 'Login',
+                    text: 'Create Wallet',
                     onTap: () async {
                       final username = usernameController.text;
                       final password = passwordController.text;
@@ -94,7 +106,7 @@ class SigninScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Authenticating user $username',
+                                    'Creating $username\'s wallet',
                                     style: const TextStyle(color: Colors.white),
                                   ),
                                   const SizedBox(width: 8),
@@ -105,38 +117,30 @@ class SigninScreen extends StatelessWidget {
                                 ],
                               )),
                         );
-                        var box = await Hive.openBox('users');
+                        var box = await Hive.openBox('wallet');
+                        var boxUser = await Hive.openBox('users');
+                        User data = boxUser.get('users');
                         // Call login method from LoginService
-                        final loginData =
-                            await loginSignupService.login(username, password);
-
-                        print('From Login Screen :${loginData}');
-                        await box.put('users', loginData);
-
-                        if (loginData?.hasWallet == false ||
-                            loginData?.hasWallet == null) {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => const CreateWalletScreen(),
-                            ),
-                          );
-                        }
-                        //If user has a wallet then redirect to homescreen
-                        else if (loginData?.hasWallet == true) {
+                        final walletData = await walletService.createWallet(
+                            username, password, data.token.toString());
+                        await box.put('wallet', walletData);
+                        print('Wallet Data: ${walletData}, ${data.token}');
+                        if (walletData?.status == 'success') {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => const HomeScreen(),
                             ),
                           );
                         }
+
                         //Show error status if passwords does not match
-                        else if (loginData?.status == 'error') {
+                        else if (walletData?.status == 'error') {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                                 backgroundColor:
                                     const Color.fromRGBO(56, 56, 56, 1),
                                 content: Text(
-                                  '${loginData?.message}',
+                                  '${walletData?.message}',
                                   style: const TextStyle(color: Colors.white),
                                 )),
                           );
@@ -148,23 +152,6 @@ class SigninScreen extends StatelessWidget {
                   );
                 },
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20.0, right: 20, top: 20),
-              child: Divider(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Don\'t have an account? '),
-                GestureDetector(
-                  onTap: onTap,
-                  child: const Text(
-                    'Signup',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                )
-              ],
             ),
           ],
         ),
