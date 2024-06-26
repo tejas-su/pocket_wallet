@@ -9,9 +9,9 @@ class TokenTab extends StatelessWidget {
       itemCount: 7,
       itemBuilder: (context, index) {
         return const ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Colors.white,
-            foregroundImage: AssetImage('assets/logo/etherium.png'),
+          leading: Icon(
+            Icons.currency_bitcoin_rounded,
+            size: 30,
           ),
           title: Text(
             'Polygon',

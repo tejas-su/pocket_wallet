@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../model/user_model.dart';
 import '../../services/services.dart';
 import '../widgets/cta_button.dart';
+import '../widgets/input_field.dart';
 
 class CreateWalletScreen extends StatelessWidget {
   const CreateWalletScreen({super.key});
@@ -36,40 +37,24 @@ class CreateWalletScreen extends StatelessWidget {
             const Center(
               child: Text('your personal wallet'),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
-              child: TextField(
-                controller: usernameController,
-                decoration: const InputDecoration(
-                    hintText: 'Your name',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)))),
-              ),
+            //Wallet Name
+            InputTextField(
+              controller: usernameController,
+              hintText: 'Your Name',
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
-              child: TextField(
-                controller: networkController,
-                enabled: false,
-                obscureText: false,
-                decoration: const InputDecoration(
-                    suffixIcon: Icon(Icons.currency_bitcoin_rounded),
-                    hintText: 'Bitcoin',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)))),
-              ),
+            //Network
+            InputTextField(
+              controller: networkController,
+              hintText: 'Bitcoin',
+              enabled: false,
+              icon: Icons.currency_bitcoin_rounded,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
-              child: TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                    suffixIcon: Icon(Icons.lock_rounded),
-                    hintText: 'Password',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)))),
-              ),
+            //Wallet Pin
+            InputTextField(
+              controller: passwordController,
+              hintText: 'Password',
+              icon: Icons.lock_rounded,
+              obobscureText: true,
             ),
             const SizedBox(height: 10),
             Padding(
@@ -125,7 +110,8 @@ class CreateWalletScreen extends StatelessWidget {
                             username, password, data.token.toString());
                         await box.put('wallet', walletData);
                         print('Wallet Data: ${walletData}, ${data.token}');
-                        if (walletData?.status == 'success') {
+                        if (usernameController.text != null ||
+                            passwordController.text != null) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => const HomeScreen(),

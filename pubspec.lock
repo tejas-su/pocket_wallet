@@ -230,14 +230,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.2"
-  flutter_sticky_header:
-    dependency: "direct main"
-    description:
-      name: flutter_sticky_header
-      sha256: "017f398fbb45a589e01491861ca20eb6570a763fd9f3888165a978e11248c709"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.6.5"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -275,14 +267,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.3.1"
-  hidable:
-    dependency: "direct main"
-    description:
-      name: hidable
-      sha256: "72ffcc3dbaa736f072b3530711088e9da5acfda02df275287c76f88ae81877b4"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.6"
   hive:
     dependency: transitive
     description:
@@ -664,14 +648,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.3.2"
-  value_layout_builder:
-    dependency: transitive
-    description:
-      name: value_layout_builder
-      sha256: "98202ec1807e94ac72725b7f0d15027afde513c55c69ff3f41bcfccb950831bc"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.3.1"
   vector_math:
     dependency: transitive
     description:

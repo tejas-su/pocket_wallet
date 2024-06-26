@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/cta_button.dart';
+import '../widgets/input_field.dart';
 
 class SignupScreen extends StatelessWidget {
   final Function()? onTap;
@@ -30,27 +31,17 @@ class SignupScreen extends StatelessWidget {
             const Center(
               child: Text('your personal wallet'),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
-              child: TextField(
-                controller: usernameController,
-                decoration: const InputDecoration(
-                    hintText: 'Username, Email or Phone number',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)))),
-              ),
+            //Username, Email or Phone number
+            InputTextField(
+              controller: usernameController,
+              hintText: 'Username, Email or Phone number',
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
-              child: TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                    suffixIcon: Icon(Icons.lock_rounded),
-                    hintText: 'Password',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)))),
-              ),
+            //Password
+            InputTextField(
+              controller: passwordController,
+              hintText: 'Password',
+              obobscureText: true,
+              icon: Icons.lock_rounded,
             ),
             const SizedBox(height: 10),
             const Padding(

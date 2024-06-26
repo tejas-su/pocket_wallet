@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'profile_screen.dart';
+import 'transfer_balance_screen.dart';
 import 'settings_screen.dart';
 import 'wallet_screen.dart';
 
@@ -14,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   List screens = const [
     WalletScreen(),
-    ProfileScreen(),
+    TransferBalance(),
     SettingsScreen(),
   ];
 
@@ -37,9 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
             selectedIcon: Icon(Icons.wallet_rounded),
           ),
           NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-            selectedIcon: Icon(Icons.person_rounded),
+            icon: Icon(Icons.currency_bitcoin_outlined),
+            label: 'Transfer',
+            selectedIcon: Icon(Icons.currency_bitcoin_rounded),
           ),
           NavigationDestination(
             icon: Icon(Icons.settings_outlined),

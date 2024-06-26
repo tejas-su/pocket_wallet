@@ -38,8 +38,6 @@ dependencies:
   google_fonts:
   provider:
   skeletonizer:
-  flutter_sticky_header:
-  hidable:
   dio:
   hive_flutter:
   

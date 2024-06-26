@@ -10,6 +10,7 @@ void main() async {
   Hive.registerAdapter(UserAdapter());
   var box = await Hive.openBox('users');
   User data = box.get('users');
+  print('Data in local storage after main function \n\n${data}\n\n');
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp(
     user: data,

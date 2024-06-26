@@ -63,41 +63,41 @@ class _WalletScreenState extends State<WalletScreen>
               child: Column(
                 children: [
                   //wallet card
-                  Column(
+                  const Column(
                     children: [
-                      const WalletCard(),
-                      const SizedBox(
+                      WalletCard(),
+                      SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15, right: 15),
-                            child: CtaButton(
-                              text: 'Swap',
-                              fontWeight: FontWeight.bold,
-                              borderColor: Theme.of(context).dividerColor,
-                              color: Colors.transparent,
-                              width: width / 2.3,
-                              radius: 10,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 15),
-                            child: CtaButton(
-                              text: 'Send',
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor,
-                              radius: 10,
-                              width: width / 2.3,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      //   children: [
+                      //     Padding(
+                      //       padding: const EdgeInsets.only(left: 15, right: 15),
+                      //       child: CtaButton(
+                      //         text: 'Swap',
+                      //         fontWeight: FontWeight.bold,
+                      //         borderColor: Theme.of(context).dividerColor,
+                      //         color: Colors.transparent,
+                      //         width: width / 2.3,
+                      //         radius: 10,
+                      //       ),
+                      //     ),
+                      //     Padding(
+                      //       padding: const EdgeInsets.only(right: 15),
+                      //       child: CtaButton(
+                      //         text: 'Send',
+                      //         fontWeight: FontWeight.bold,
+                      //         color: Theme.of(context).primaryColor,
+                      //         radius: 10,
+                      //         width: width / 2.3,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(
+                      //   height: 30,
+                      // ),
                     ],
                   ),
                   TabBar(

@@ -9,6 +9,8 @@ import 'package:my_wallet/presentation/widgets/cta_button.dart';
 import 'package:my_wallet/services/services.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/input_field.dart';
+
 class SigninScreen extends StatelessWidget {
   final Function()? onTap;
   const SigninScreen({super.key, required this.onTap});
@@ -37,28 +39,19 @@ class SigninScreen extends StatelessWidget {
             const Center(
               child: Text('your personal wallet'),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
-              child: TextField(
-                controller: usernameController,
-                decoration: const InputDecoration(
-                    hintText: 'Username, Email or Phone number',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)))),
-              ),
+            //Username, Email or Phone number
+            InputTextField(
+              controller: usernameController,
+              hintText: 'Username, Email or Phone number',
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
-              child: TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                    suffixIcon: Icon(Icons.lock_rounded),
-                    hintText: 'Password',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)))),
-              ),
+            //Password
+            InputTextField(
+              controller: passwordController,
+              hintText: 'Password',
+              obobscureText: true,
+              icon: Icons.lock_rounded,
             ),
+            //Sign in button
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
