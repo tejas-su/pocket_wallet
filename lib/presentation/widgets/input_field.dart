@@ -21,6 +21,9 @@ class InputTextField extends StatelessWidget {
 
   ///Padding Top: Default 20px
   final double top;
+
+  ///Keyboard type
+  final TextInputType? keyboardType;
   const InputTextField(
       {super.key,
       this.labelText,
@@ -29,6 +32,7 @@ class InputTextField extends StatelessWidget {
       this.obobscureText = false,
       required this.hintText,
       this.top = 20,
+      this.keyboardType,
       this.enabled = true});
 
   @override
@@ -36,6 +40,7 @@ class InputTextField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 20.0, right: 20, top: top),
       child: TextField(
+        keyboardType: keyboardType,
         controller: controller,
         obscureText: obobscureText,
         enabled: enabled,

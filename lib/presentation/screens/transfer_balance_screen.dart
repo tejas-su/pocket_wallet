@@ -17,8 +17,10 @@ class TransferBalance extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     TextEditingController recipientAddressController = TextEditingController();
     TextEditingController senderAddressController = TextEditingController();
-    TextEditingController amountController = TextEditingController();
+    TextEditingController amountControllerTB = TextEditingController();
+    TextEditingController amountControllerAD = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    TextEditingController walletAddressController = TextEditingController();
     Wallet walletService = Wallet();
     GetUSerDataFromBox userDataFromBox = GetUSerDataFromBox();
     User data = userDataFromBox.getUserDataFromBox();
@@ -68,8 +70,9 @@ class TransferBalance extends StatelessWidget {
             //amount
             InputTextField(
               top: 20,
-              controller: amountController,
+              controller: amountControllerTB,
               hintText: 'Amount ',
+              keyboardType: TextInputType.number,
             ),
             //User pin
             InputTextField(
@@ -102,7 +105,7 @@ class TransferBalance extends StatelessWidget {
                     onTap: () async {
                       String recipientAddress = recipientAddressController.text;
                       String sendersAddress = senderAddressController.text;
-                      String amount = amountController.text;
+                      String amount = amountControllerTB.text;
                       String password = passwordController.text;
 
                       User datafrombox = userDataFromBox.getUserDataFromBox();
@@ -169,7 +172,9 @@ class TransferBalance extends StatelessWidget {
                 ),
               ],
             ),
-            //Swap Currency
+            //##################################################################################################
+            //############################################################Request Airdrop
+            //################################################################################################
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
@@ -196,6 +201,7 @@ class TransferBalance extends StatelessWidget {
             InputTextField(
               top: 0,
               controller: recipientAddressController,
+              keyboardType: TextInputType.number,
               labelText: 'You pay',
               hintText: 'Amount',
               icon: Icons.person_rounded,
@@ -220,47 +226,55 @@ class TransferBalance extends StatelessWidget {
                   child: CtaButton(
                     text: 'Send',
                     onTap: () async {
-                      String recipientAddress = recipientAddressController.text;
-                      String sendersAddress = senderAddressController.text;
-                      String amount = amountController.text;
-                      String password = passwordController.text;
-                      var box = await Hive.openBox('users');
-                      User datafrombox = await box.get('users');
+                      String wallet_address = walletAddressController.text;
+                      int? amount = int.tryParse(amountControllerAD.text);
+                      User datafrombox = userDataFromBox.getUserDataFromBox();
                       String token = datafrombox.token.toString();
-                      //Show transfering balance
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            duration: Durations.extralong1,
-                            backgroundColor: Color.fromRGBO(56, 56, 56, 1),
-                            content: Text(
-                              'Processing air drop request',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
-                            )),
-                      );
-                      TransactionModel? response =
-                          await walletService.transferBalance(recipientAddress,
-                              sendersAddress, amount, password, token);
 
-                      if (response?.status == 'success') {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                              backgroundColor:
-                                  const Color.fromRGBO(56, 56, 56, 1),
-                              content: Text(
-                                '${response?.message}',
-                                style: const TextStyle(color: Colors.white),
-                              )),
-                        );
+                      if (wallet_address.isEmpty || amount == null) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                                backgroundColor: Color.fromRGBO(56, 56, 56, 1),
+                                content: Text(
+                                  'Please fill in all the fields!',
+                                  style: TextStyle(color: Colors.white),
+                                  textAlign: TextAlign.center,
+                                )));
                       } else {
+                        //Show transfering balance
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
+                              duration: Durations.extralong1,
                               backgroundColor: Color.fromRGBO(56, 56, 56, 1),
                               content: Text(
-                                'Transaction failed, please try again later',
+                                'Processing air drop request',
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: Colors.white),
                               )),
                         );
+                        TransactionModel? response = await walletService
+                            .airDrop(wallet_address, 'devnet', token, amount);
+
+                        if (response?.status == 'success') {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                backgroundColor:
+                                    const Color.fromRGBO(56, 56, 56, 1),
+                                content: Text(
+                                  '${response?.message}',
+                                  style: const TextStyle(color: Colors.white),
+                                )),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                backgroundColor: Color.fromRGBO(56, 56, 56, 1),
+                                content: Text(
+                                  'Transaction failed, please try again later',
+                                  style: TextStyle(color: Colors.white),
+                                )),
+                          );
+                        }
                       }
                     },
                     fontWeight: FontWeight.bold,
