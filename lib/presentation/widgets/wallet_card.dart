@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WalletCard extends StatelessWidget {
-  const WalletCard({super.key});
+  final int balance;
+  final String network;
+  const WalletCard(
+      {super.key, this.balance = 0, this.network = 'Polygon Mainnet'});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class WalletCard extends StatelessWidget {
               ),
               //Wallet BAlance goes here
               Text(
-                '\$ 200.00',
+                '\$ $balance.00',
                 maxLines: 1,
                 style: GoogleFonts.inter(
                     fontSize: 35, fontWeight: FontWeight.bold),
@@ -39,18 +42,18 @@ class WalletCard extends StatelessWidget {
 
               //Network goes below
               GestureDetector(
-                child: const Row(
+                child: Row(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       backgroundColor: Colors.amber,
                       radius: 7,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
-                      'Polygon Mainnet',
-                      style: TextStyle(color: Colors.white54),
+                      network,
+                      style: const TextStyle(color: Colors.white54),
                     )
                   ],
                 ),

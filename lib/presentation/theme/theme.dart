@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ThemeData darktheme = ThemeData(
-  primaryColor: Colors.deepPurpleAccent,
+  primaryColor: Colors.deepPurpleAccent.shade200,
   useMaterial3: true,
   brightness: Brightness.dark,
   cardColor: const Color.fromRGBO(30, 30, 30, 1),

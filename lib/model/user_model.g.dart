@@ -23,15 +23,15 @@ class UserAdapter extends TypeAdapter<User> {
       token: fields[3] as String?,
       username: fields[4] as String?,
       email: fields[5] as String?,
-      firstName: fields[6] as String?,
-      lastName: fields[7] as String?,
+      first_name: fields[6] as String?,
+      last_name: fields[7] as String?,
       isVerified: fields[8] as bool?,
       role: fields[9] as String?,
-      ownerId: fields[10] as String?,
-      walletAddress: fields[11] as String?,
-      hasWallet: fields[12] as bool?,
-      lastLogin: fields[13] as String?,
-      profilePictureUrl: fields[14] as String?,
+      owner_id: fields[10] as String?,
+      wallet_address: fields[11] as String?,
+      has_wallet: fields[12] as bool?,
+      last_login: fields[13] as String?,
+      profile_picture_url: fields[14] as String?,
     );
   }
 
@@ -52,23 +52,23 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(5)
       ..write(obj.email)
       ..writeByte(6)
-      ..write(obj.firstName)
+      ..write(obj.first_name)
       ..writeByte(7)
-      ..write(obj.lastName)
+      ..write(obj.last_name)
       ..writeByte(8)
       ..write(obj.isVerified)
       ..writeByte(9)
       ..write(obj.role)
       ..writeByte(10)
-      ..write(obj.ownerId)
+      ..write(obj.owner_id)
       ..writeByte(11)
-      ..write(obj.walletAddress)
+      ..write(obj.wallet_address)
       ..writeByte(12)
-      ..write(obj.hasWallet)
+      ..write(obj.has_wallet)
       ..writeByte(13)
-      ..write(obj.lastLogin)
+      ..write(obj.last_login)
       ..writeByte(14)
-      ..write(obj.profilePictureUrl);
+      ..write(obj.profile_picture_url);
   }
 
   @override

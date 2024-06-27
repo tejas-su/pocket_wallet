@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class InputTextField extends StatelessWidget {
   ///Text editing controller
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   ///Icon Data: Example Icons.lock_rounded
   final IconData? icon;
@@ -24,7 +24,7 @@ class InputTextField extends StatelessWidget {
   const InputTextField(
       {super.key,
       this.labelText,
-      required this.controller,
+      this.controller,
       this.icon,
       this.obobscureText = false,
       required this.hintText,
@@ -37,7 +37,7 @@ class InputTextField extends StatelessWidget {
       padding: EdgeInsets.only(left: 20.0, right: 20, top: top),
       child: TextField(
         controller: controller,
-        obscureText: true,
+        obscureText: obobscureText,
         enabled: enabled,
         decoration: InputDecoration(
             labelText: labelText,

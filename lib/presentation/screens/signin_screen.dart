@@ -9,6 +9,7 @@ import 'package:my_wallet/presentation/widgets/cta_button.dart';
 import 'package:my_wallet/services/services.dart';
 import 'package:provider/provider.dart';
 
+import '../../model/user_model.dart';
 import '../widgets/input_field.dart';
 
 class SigninScreen extends StatelessWidget {
@@ -103,11 +104,14 @@ class SigninScreen extends StatelessWidget {
                         final loginData =
                             await loginSignupService.login(username, password);
 
-                        print('From Login Screen :${loginData}');
+                        print('\n\n\nFrom Login Screen :${loginData}\n\n\n');
                         await box.put('users', loginData);
 
-                        if (loginData?.hasWallet == false ||
-                            loginData?.hasWallet == null) {
+                        var datafrombox = await box.get('users');
+                        print('\n\ndatafrom box: $datafrombox\n\n');
+
+                        if (loginData?.has_wallet == false ||
+                            loginData?.has_wallet == null) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => const CreateWalletScreen(),
@@ -115,7 +119,7 @@ class SigninScreen extends StatelessWidget {
                           );
                         }
                         //If user has a wallet then redirect to homescreen
-                        else if (loginData?.hasWallet == true) {
+                        else if (loginData?.has_wallet == true) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => const HomeScreen(),

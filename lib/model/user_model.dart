@@ -18,23 +18,23 @@ class User {
   @HiveField(5)
   String? email;
   @HiveField(6)
-  String? firstName;
+  String? first_name;
   @HiveField(7)
-  String? lastName;
+  String? last_name;
   @HiveField(8)
   bool? isVerified;
   @HiveField(9)
   String? role;
   @HiveField(10)
-  String? ownerId;
+  String? owner_id;
   @HiveField(11)
-  String? walletAddress;
+  String? wallet_address;
   @HiveField(12)
-  bool? hasWallet;
+  bool? has_wallet;
   @HiveField(13)
-  String? lastLogin;
+  String? last_login;
   @HiveField(14)
-  String? profilePictureUrl;
+  String? profile_picture_url;
   User({
     this.message,
     this.status,
@@ -42,15 +42,15 @@ class User {
     this.token,
     this.username,
     this.email,
-    this.firstName,
-    this.lastName,
+    this.first_name,
+    this.last_name,
     this.isVerified,
     this.role,
-    this.ownerId,
-    this.walletAddress,
-    this.hasWallet,
-    this.lastLogin,
-    this.profilePictureUrl,
+    this.owner_id,
+    this.wallet_address,
+    this.has_wallet,
+    this.last_login,
+    this.profile_picture_url,
   });
 
   User copyWith({
@@ -60,15 +60,15 @@ class User {
     String? token,
     String? username,
     String? email,
-    String? firstName,
-    String? lastName,
+    String? first_name,
+    String? last_name,
     bool? isVerified,
     String? role,
-    String? ownerId,
-    String? walletAddress,
-    bool? hasWallet,
-    String? lastLogin,
-    String? profilePictureUrl,
+    String? owner_id,
+    String? wallet_address,
+    bool? has_wallet,
+    String? last_login,
+    String? profile_picture_url,
   }) {
     return User(
       message: message ?? this.message,
@@ -77,15 +77,15 @@ class User {
       token: token ?? this.token,
       username: username ?? this.username,
       email: email ?? this.email,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
+      first_name: first_name ?? this.first_name,
+      last_name: last_name ?? this.last_name,
       isVerified: isVerified ?? this.isVerified,
       role: role ?? this.role,
-      ownerId: ownerId ?? this.ownerId,
-      walletAddress: walletAddress ?? this.walletAddress,
-      hasWallet: hasWallet ?? this.hasWallet,
-      lastLogin: lastLogin ?? this.lastLogin,
-      profilePictureUrl: profilePictureUrl ?? this.profilePictureUrl,
+      owner_id: owner_id ?? this.owner_id,
+      wallet_address: wallet_address ?? this.wallet_address,
+      has_wallet: has_wallet ?? this.has_wallet,
+      last_login: last_login ?? this.last_login,
+      profile_picture_url: profile_picture_url ?? this.profile_picture_url,
     );
   }
 
@@ -97,15 +97,15 @@ class User {
       'token': token,
       'username': username,
       'email': email,
-      'firstName': firstName,
-      'lastName': lastName,
+      'first_name': first_name,
+      'last_name': last_name,
       'isVerified': isVerified,
       'role': role,
-      'ownerId': ownerId,
-      'walletAddress': walletAddress,
-      'hasWallet': hasWallet,
-      'lastLogin': lastLogin,
-      'profilePictureUrl': profilePictureUrl,
+      'owner_id': owner_id,
+      'wallet_address': wallet_address,
+      'has_wallet': has_wallet,
+      'last_login': last_login,
+      'profile_picture_url': profile_picture_url,
     };
   }
 
@@ -117,17 +117,20 @@ class User {
       token: map['token'] != null ? map['token'] as String : null,
       username: map['username'] != null ? map['username'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
-      firstName: map['firstName'] != null ? map['firstName'] as String : null,
-      lastName: map['lastName'] != null ? map['lastName'] as String : null,
+      first_name:
+          map['first_name'] != null ? map['first_name'] as String : null,
+      last_name: map['last_name'] != null ? map['last_name'] as String : null,
       isVerified: map['isVerified'] != null ? map['isVerified'] as bool : null,
       role: map['role'] != null ? map['role'] as String : null,
-      ownerId: map['ownerId'] != null ? map['ownerId'] as String : null,
-      walletAddress:
-          map['walletAddress'] != null ? map['walletAddress'] as String : null,
-      hasWallet: map['hasWallet'] != null ? map['hasWallet'] as bool : null,
-      lastLogin: map['lastLogin'] != null ? map['lastLogin'] as String : null,
-      profilePictureUrl: map['profilePictureUrl'] != null
-          ? map['profilePictureUrl'] as String
+      owner_id: map['owner_id'] != null ? map['owner_id'] as String : null,
+      wallet_address: map['wallet_address'] != null
+          ? map['wallet_address'] as String
+          : null,
+      has_wallet: map['has_wallet'] != null ? map['has_wallet'] as bool : null,
+      last_login:
+          map['last_login'] != null ? map['last_login'] as String : null,
+      profile_picture_url: map['profile_picture_url'] != null
+          ? map['profile_picture_url'] as String
           : null,
     );
   }
@@ -139,7 +142,7 @@ class User {
 
   @override
   String toString() {
-    return 'User(message: $message, status: $status, balance: $balance, token: $token, username: $username, email: $email, firstName: $firstName, lastName: $lastName, isVerified: $isVerified, role: $role, ownerId: $ownerId, walletAddress: $walletAddress, hasWallet: $hasWallet, lastLogin: $lastLogin, profilePictureUrl: $profilePictureUrl)';
+    return 'User(message: $message, status: $status, balance: $balance, token: $token, username: $username, email: $email, first_name: $first_name, last_name: $last_name, isVerified: $isVerified, role: $role, owner_id: $owner_id, wallet_address: $wallet_address, has_wallet: $has_wallet, last_login: $last_login, profile_picture_url: $profile_picture_url)';
   }
 
   @override
@@ -152,15 +155,15 @@ class User {
         other.token == token &&
         other.username == username &&
         other.email == email &&
-        other.firstName == firstName &&
-        other.lastName == lastName &&
+        other.first_name == first_name &&
+        other.last_name == last_name &&
         other.isVerified == isVerified &&
         other.role == role &&
-        other.ownerId == ownerId &&
-        other.walletAddress == walletAddress &&
-        other.hasWallet == hasWallet &&
-        other.lastLogin == lastLogin &&
-        other.profilePictureUrl == profilePictureUrl;
+        other.owner_id == owner_id &&
+        other.wallet_address == wallet_address &&
+        other.has_wallet == has_wallet &&
+        other.last_login == last_login &&
+        other.profile_picture_url == profile_picture_url;
   }
 
   @override
@@ -171,14 +174,14 @@ class User {
         token.hashCode ^
         username.hashCode ^
         email.hashCode ^
-        firstName.hashCode ^
-        lastName.hashCode ^
+        first_name.hashCode ^
+        last_name.hashCode ^
         isVerified.hashCode ^
         role.hashCode ^
-        ownerId.hashCode ^
-        walletAddress.hashCode ^
-        hasWallet.hashCode ^
-        lastLogin.hashCode ^
-        profilePictureUrl.hashCode;
+        owner_id.hashCode ^
+        wallet_address.hashCode ^
+        has_wallet.hashCode ^
+        last_login.hashCode ^
+        profile_picture_url.hashCode;
   }
 }
