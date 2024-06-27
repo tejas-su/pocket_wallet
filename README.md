@@ -12,3 +12,8 @@ replicates the wallet features found in the specified app. The required APIs are
 integrated into the Flutter app to handle various wallet operations. The aim is to
 demonstrate a good understanding of Flutter, API integration, state management with Provider,
 and mobile app development best practices.
+
+## Screenshots
+
+<img src="assets/github/login.png" alt="signin" width="300"/> <img src="assets/github/signup.png" alt="signup" width="300"/> <img src="assets/github/create_wallet.png" alt="create wallet" width="300"/> <img src="assets/github/wallet.png" alt="wallet" width="300"/> <img src="assets/github/balance_transfer.png" alt="balance transfer" width="300"/> <img src="assets/github/settings.png" alt="settings" width="300"/>
+
